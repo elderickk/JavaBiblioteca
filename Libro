@@ -1,0 +1,58 @@
+class Libro {
+    private String titulo;
+    private String autor;
+    private String anioDePublicacion;
+    private boolean disponible;
+
+    // Constructor
+    public Libro(String titulo, String autor, String anioDePublicacion) {
+        this.titulo = titulo;
+        this.autor = autor;
+        this.anioDePublicacion = anioDePublicacion;
+        this.disponible = true; // El libro está disponible al principio
+    }
+
+    // Getters y Setters
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
+
+    public String getAutor() {
+        return autor;
+    }
+
+    public void setAutor(String autor) {
+        this.autor = autor;
+    }
+
+    public String getAnioDePublicacion() {
+        return anioDePublicacion;
+    }
+
+    public void setAnioDePublicacion(String anioDePublicacion) {
+        this.anioDePublicacion = anioDePublicacion;
+    }
+
+    public boolean isDisponible() {
+        return disponible;
+    }
+
+    // Métodos para prestar y devolver el libro
+    public void prestar() {
+        if (disponible) {
+            disponible = false;
+            System.out.println("El libro ha sido prestado.");
+        }
+    }
+
+    public void devolver() {
+        if (!disponible) {
+            disponible = true;
+            System.out.println("El libro ha sido devuelto.");
+        }
+    }
+}
