@@ -1,0 +1,84 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Ingresar los datos del libro
+        System.out.println("Ingrese el título del libro:");
+        String titulo = scanner.nextLine();
+
+        System.out.println("Ingrese el autor del libro:");
+        String autor = scanner.nextLine();
+
+        System.out.println("Ingrese el año de publicación:");
+        String anioDePublicacion = scanner.nextLine();
+
+        // Crear el objeto Libro
+        Libro libro = new Libro(titulo, autor, anioDePublicacion);
+
+        // Mostrar la información inicial del libro
+        System.out.println("\nInformación del libro:");
+        mostrarInfoLibro(libro);
+
+        // Menú de opciones
+        boolean salir = false;
+        while (!salir) {
+            System.out.println("\n¿Qué desea hacer con el libro?");
+            System.out.println("1: Prestar\n2: Devolver\n3: Modificar información\n4: Salir");
+            int opcion = scanner.nextInt();
+            scanner.nextLine(); // Consumir el salto de línea
+
+            switch (opcion) {
+                case 1:
+                    // Intentar prestar el libro
+                    if (libro.isDisponible()) {
+                        libro.prestar();
+                    } else {
+                        System.out.println("El libro ya está prestado y no puede ser prestado nuevamente.");
+                    }
+                    break;
+                case 2:
+                    // Intentar devolver el libro
+                    if (!libro.isDisponible()) {
+                        libro.devolver();
+                    } else {
+                        System.out.println("El libro ya está disponible y no puede ser devuelto.");
+                    }
+                    break;
+                case 3:
+                    // Modificar los atributos del libro
+                    System.out.println("Ingrese el nuevo título:");
+                    libro.setTitulo(scanner.nextLine());
+
+                    System.out.println("Ingrese el nuevo autor:");
+                    libro.setAutor(scanner.nextLine());
+
+                    System.out.println("Ingrese el nuevo año de publicación:");
+                    libro.setAnioDePublicacion(scanner.nextLine());
+                    break;
+                case 4:
+                    // Salir del programa
+                    salir = true;
+                    break;
+                default:
+                    System.out.println("Opción no válida.");
+                    break;
+            }
+
+            // Mostrar la información actualizada del libro
+            System.out.println("\nInformación actualizada del libro:");
+            mostrarInfoLibro(libro);
+        }
+
+        scanner.close();
+    }
+
+    // Método para mostrar la información del libro
+    public static void mostrarInfoLibro(Libro libro) {
+        System.out.println("Título: " + libro.getTitulo());
+        System.out.println("Autor: " + libro.getAutor());
+        System.out.println("Año de Publicación: " + libro.getAnioDePublicacion());
+        System.out.println("Estado: " + (libro.isDisponible() ? "Disponible" : "Prestado"));
+    }
+}
